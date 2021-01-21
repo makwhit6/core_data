@@ -1,0 +1,493 @@
+---
+title: "Grade 3 Data"
+author: "Makayla Whitney, Joe Nese"
+date: "1/21/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(qualtRics)
+library(here)
+library(readxl)
+library(knitr)
+```
+
+
+```{r g3 data, echo = FALSE}
+qualtrics_api_credentials(api_key = "RLPk714vkWXUHfT5uv5fm0hSyk0a3PBO5t8ouoAR", 
+                          base_url = "oregon.qualtrics.com",
+                          install = TRUE,
+                          overwrite = TRUE)
+
+readRenviron("~/.Renviron")
+
+surveys <- all_surveys()
+
+qual_raw_g3 <- fetch_survey(surveyID = pull(filter(surveys, name == "Grade3_Focus-Group-Survey"), id), 
+                            force_request = TRUE)
+```
+
+
+```{r rename variables, echo = FALSE}
+rename_fx <- function(x){
+  df <- x %>% 
+    slice(1:2)
+  as_tibble(cbind(qual = names(df), t(df))) %>% 
+    select(qual, new = V2, original = V3)}
+
+lookup <- tibble(
+  sheet = paste("Figure", c(1:4)),
+  data = map(sheet, ~read_xlsx(here("data", "Grade3_Focus-Group-Survey_January 19 2021_15.26.xlsx"),
+                              sheet = .)),
+  dta = map(data, ~rename_fx(.))) %>% 
+  select(dta) %>% 
+  unnest(cols = c(dta)) %>% 
+  mutate(new = str_to_lower(new))
+
+qual_raw_g3 %>% 
+  select_if(names(qual_raw_g3) %in% lookup$qual) %>% 
+  pivot_longer(
+    cols = everything(),
+    names_to = "qual",
+    values_to = "values"
+  ) %>%
+  left_join(lookup) %>% 
+  select(new, values) %>% 
+  pivot_wider(
+    names_from = new,
+    values_from = values
+  ) %>% 
+  unnest(cols = everything())
+
+```
+
+#Introduction
+
+
+
+#Global Questions
+
+The figure below shows the same data you have just seen, but in a different way. Now, the lines are in separate graphs, and each is surrounded by gray shading. The shaded area represents the area that we think contains the students true score. This is sometimes called the measurement error.
+
+The less measurement error, the better, because that means the score is more accurate. That is, the score better reflects the students "true ORF ability." So the smaller the gray shaded area, the better. 
+
+When you and your peers discuss student data (for example, in school teams), do you discuss measurement error, or whether the data is accurate, or whether the data reflects what the student can do?
+```{r global questions}
+
+#should probably word smith the above - I copied it verbatim from the survey
+
+#bar graph with two columns one for shading and one for measurement_error
+
+```
+
+The figures that follow are from a third grade student that participated in the 2018-2019 study. Three teachers answered a series of questions pertaining to these figures. The questions are listed below followed by a summary of their answers. 
+
+##Plot 1 (TAB 1)
+```{r plot display}
+#insert plot visual here and explanation of plot
+
+#Is there a way to make a "go home" button that follows someone scrolling down the page? That way if they can't remember what the graph looks like they can just be shot back to it. Or is there a way for the graph to move from front and center to the side bar and then follow the person as they are scrolling down the page? 
+
+```
+
+For the first plot, the student's fall easyCBM oral reading fluency (ORF) score was *62 WCPM* (words correct per minute). Below are descriptions of the student's reading level based on this score alone. 
+
+```{r level descriptions}
+
+#table 
+
+
+```
+
+Based on this fall ORF score, the student is reading:
+```{r reading level}
+
+#bar graph
+
+```
+
+Is this student at risk of poor reading outcomes?
+```{r at risk}
+
+#bar graph followed by a table of further explanation
+
+```
+
+Which line might be better for progress monitoring? And why?
+```{r pm line}
+
+#table with one column for pm_line and one column for pm_line_why
+
+```
+
+Based on the trajectory of the lines - that is, the shape of the lines - which line might be more trustworthy? And why?
+```{r trust line}
+
+#table with one column for trust_line and one column for trust_line_why
+
+```
+
+Let's say the figure shows data of a student receiving a reading intervention. For the *YELLOW* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+``` {r yellow line}
+
+#table with one column for yellow_line and one column for yellow_line_why
+
+```
+
+Let's say the figure shows data of a student receiving a reading intervention. For the *BLACK* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+```{r black line}
+
+#table with one column for black_line and one column for black_line_why
+
+```
+
+Which line might better correspond with the SBAC performance level?
+```{r SBAC}
+
+#bar graph
+
+```
+
+Based on the last data point from May or June ONLY, which point might better match what you expect from a student at this performance level?
+```{r last point}
+
+#bar graph
+
+```
+
+Based on the first data point from October or November ONLY, which point might better match what you expect from a student at this performance level?
+```{r first point}
+
+#bar graph
+
+```
+
+Which line might be better for progress monitoring and data-based decisions?
+```{r better line}
+
+#table with one column for better_line and one column for better_line_why
+
+```
+
+Does the shaded area in the graphs give you useful information if you were using the graphs to make data-based decisions?
+```{r shaded_area}
+
+#bar graph
+
+```
+
+How might you use this figure to make a data-based decision?
+```{r decisions}
+
+#block quotes
+
+```
+
+
+##Plot 2 (TAB 2)
+```{r plot display}
+#insert plot visual here and explanation of plot
+
+#Is there a way to make a "go home" button that follows someone scrolling down the page? That way if they can't remember what the graph looks like they can just be shot back to it. Or is there a way for the graph to move from front and center to the side bar and then follow the person as they are scrolling down the page? 
+
+```
+
+For the second plot, the student's fall easyCBM oral reading fluency (ORF) score was *58 WCPM* (words correct per minute). Below are descriptions of the student's reading level based on this score alone. 
+
+```{r level descriptions}
+
+#table 
+
+
+```
+
+Based on this fall ORF score, the student is reading:
+```{r reading level}
+
+#bar graph
+
+```
+
+Is this student at risk of poor reading outcomes?
+```{r at risk}
+
+#bar graph followed by a table of further explanation
+
+```
+
+Which line might be better for progress monitoring? And why?
+```{r pm line}
+
+#table with one column for pm_line and one column for pm_line_why
+
+```
+
+Based on the trajectory of the lines - that is, the shape of the lines - which line might be more trustworthy? And why?
+```{r trust line}
+
+#table with one column for trust_line and one column for trust_line_why
+
+```
+
+Let's say the figure shows data of a student receiving a reading intervention. For the *YELLOW* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+``` {r yellow line}
+
+#table with one column for yellow_line and one column for yellow_line_why
+
+```
+
+Let's say the figure shows data of a student receiving a reading intervention. For the *BLACK* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+```{r black line}
+
+#table with one column for black_line and one column for black_line_why
+
+```
+
+Which line might better correspond with the SBAC performance level?
+```{r SBAC}
+
+#bar graph
+
+```
+
+Based on the last data point from May or June ONLY, which point might better match what you expect from a student at this performance level?
+```{r last point}
+
+#bar graph
+
+```
+
+Based on the first data point from October or November ONLY, which point might better match what you expect from a student at this performance level?
+```{r first point}
+
+#bar graph
+
+```
+
+Which line might be better for progress monitoring and data-based decisions?
+```{r better line}
+
+#table with one column for better_line and one column for better_line_why
+
+```
+
+Does the shaded area in the graphs give you useful information if you were using the graphs to make data-based decisions?
+```{r shaded_area}
+
+#bar graph
+
+```
+
+How might you use this figure to make a data-based decision?
+```{r decisions}
+
+#block quotes
+
+```
+
+
+##Plot 3 (TAB 3)
+```{r plot display}
+#insert plot visual here and explanation of plot
+
+#Is there a way to make a "go home" button that follows someone scrolling down the page? That way if they can't remember what the graph looks like they can just be shot back to it. Or is there a way for the graph to move from front and center to the side bar and then follow the person as they are scrolling down the page? 
+
+```
+
+For the third plot, the student's fall easyCBM oral reading fluency (ORF) score was *48 WCPM* (words correct per minute). Below are descriptions of the student's reading level based on this score alone. 
+
+```{r level descriptions}
+
+#table 
+
+
+```
+
+Based on this fall ORF score, the student is reading:
+```{r reading level}
+
+#bar graph
+
+```
+
+Is this student at risk of poor reading outcomes?
+```{r at risk}
+
+#bar graph followed by a table of further explanation
+
+```
+
+Which line might be better for progress monitoring? And why?
+```{r pm line}
+
+#table with one column for pm_line and one column for pm_line_why
+
+```
+
+Based on the trajectory of the lines - that is, the shape of the lines - which line might be more trustworthy? And why?
+```{r trust line}
+
+#table with one column for trust_line and one column for trust_line_why
+
+```
+
+Let's say the figure shows data of a student receiving a reading intervention. For the *YELLOW* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+``` {r yellow line}
+
+#table with one column for yellow_line and one column for yellow_line_why
+
+```
+
+Let's say the figure shows data of a student receiving a reading intervention. For the *BLACK* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+```{r black line}
+
+#table with one column for black_line and one column for black_line_why
+
+```
+
+Which line might better correspond with the SBAC performance level?
+```{r SBAC}
+
+#bar graph
+
+```
+
+Based on the last data point from May or June ONLY, which point might better match what you expect from a student at this performance level?
+```{r last point}
+
+#bar graph
+
+```
+
+Based on the first data point from October or November ONLY, which point might better match what you expect from a student at this performance level?
+```{r first point}
+
+#bar graph
+
+```
+
+Which line might be better for progress monitoring and data-based decisions?
+```{r better line}
+
+#table with one column for better_line and one column for better_line_why
+
+```
+
+Does the shaded area in the graphs give you useful information if you were using the graphs to make data-based decisions?
+```{r shaded_area}
+
+#bar graph
+
+```
+
+How might you use this figure to make a data-based decision?
+```{r decisions}
+
+#block quotes
+
+```
+
+
+##Plot 4 (TAB 4)
+```{r plot display}
+#insert plot visual here and explanation of plot
+
+#Is there a way to make a "go home" button that follows someone scrolling down the page? That way if they can't remember what the graph looks like they can just be shot back to it. Or is there a way for the graph to move from front and center to the side bar and then follow the person as they are scrolling down the page? 
+
+```
+
+For the final plot, the student's fall easyCBM oral reading fluency (ORF) score was *51 WCPM* (words correct per minute). Below are descriptions of the student's reading level based on this score alone. 
+
+```{r level descriptions}
+
+#table 
+
+
+```
+
+Based on this fall ORF score, the student is reading:
+```{r reading level}
+
+#bar graph
+
+```
+
+Is this student at risk of poor reading outcomes?
+```{r at risk}
+
+#bar graph followed by a table of further explanation
+
+```
+
+Which line might be better for progress monitoring? And why?
+```{r pm line}
+
+#table with one column for pm_line and one column for pm_line_why
+
+```
+
+Based on the trajectory of the lines - that is, the shape of the lines - which line might be more trustworthy? And why?
+```{r trust line}
+
+#table with one column for trust_line and one column for trust_line_why
+
+```
+
+Let's say the figure shows data of a student receiving a reading intervention. For the *YELLOW* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+``` {r yellow line}
+
+#table with one column for yellow_line and one column for yellow_line_why
+
+```
+
+Let's say the figure shows data of a student receiving a reading intervention. For the *BLACK* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+```{r black line}
+
+#table with one column for black_line and one column for black_line_why
+
+```
+
+Which line might better correspond with the SBAC performance level?
+```{r SBAC}
+
+#bar graph
+
+```
+
+Based on the last data point from May or June ONLY, which point might better match what you expect from a student at this performance level?
+```{r last point}
+
+#bar graph
+
+```
+
+Based on the first data point from October or November ONLY, which point might better match what you expect from a student at this performance level?
+```{r first point}
+
+#bar graph
+
+```
+
+Which line might be better for progress monitoring and data-based decisions?
+```{r better line}
+
+#table with one column for better_line and one column for better_line_why
+
+```
+
+Does the shaded area in the graphs give you useful information if you were using the graphs to make data-based decisions?
+```{r shaded_area}
+
+#bar graph
+
+```
+
+How might you use this figure to make a data-based decision?
+```{r decisions}
+
+#block quotes
+
+```
