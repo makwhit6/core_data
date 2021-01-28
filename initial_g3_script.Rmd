@@ -13,6 +13,7 @@ library(qualtRics)
 library(here)
 library(readxl)
 library(knitr)
+library(RColorBrewer)
 ```
 
 
@@ -47,7 +48,7 @@ lookup <- tibble(
   unnest(cols = c(dta)) %>% 
   mutate(new = str_to_lower(new))
 
-qual_raw_g3 %>% 
+final_g3_data <- qual_raw_g3 %>% 
   select_if(names(qual_raw_g3) %in% lookup$qual) %>% 
   pivot_longer(
     cols = everything(),
@@ -99,6 +100,7 @@ For the first plot, the student's fall easyCBM oral reading fluency (ORF) score 
 
 #table 
 
+kable(final_g3_data["f1_level_description"], caption = "Teacher Description of Student's Level")
 
 ```
 
@@ -107,9 +109,21 @@ Based on this fall ORF score, the student is reading:
 
 #bar graph
 
+readinglevel <- final_g3_data %>%
+  select("f1_reading_level")
+
+ggplot(readinglevel, aes(x = f1_reading_level)) +
+  geom_bar() +
+  labs(title = "Student Reading Level",
+       subtitle = "Based on teacher observation of ORF score",
+       x = "Level Categorization",
+       y = "Teacher") +
+  theme_minimal() +
+  scale_colour_viridis_b()
+
 ```
 
-Is this student at risk of poor reading outcomes?
+Is this student at risk of poor reading outcomes? If you answered "not enough information," please specify what other data you would like to see for this student.
 ```{r at risk}
 
 #bar graph followed by a table of further explanation
