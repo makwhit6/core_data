@@ -76,9 +76,9 @@ final_g3_data <- qual_raw_g3 %>%
 
 final_g3_data <- final_g3_data %>% 
   mutate(across(ends_with("reading_level"), ~fct_expand(.x, "Above grade level", "At grade level", "Below grade level")),
-         across(ends_with("at_risk"), ~recode(.x, "Not enough information" = "Not enough information (Please specify what other data would you like to see for this student)")),
+         across(ends_with("at_risk"), ~recode(.x, "Not enough information (Please specify what other data would you like to see for this student)" = "Not enough information")),
          across(ends_with("at_risk"), ~fct_expand(.x, "Yes", "No", "Not enough information")),
-         across(matches("pm|trust|sbac|last|first|better"), ~recode(.x, "CORE (Black)" = "Black", "Traditional (Yellow)" = "Yellow")),
+         across(matches("pm|trust|sbac|last|first|better"), ~recode(.x, "Black" = "CORE (Black)", "Yellow" = "Traditional (Yellow)")),
          across(matches("pm|trust|sbac|last|first|better"), ~fct_expand(.x,
            "CORE (Black)", "Traditional (Yellow)", "No difference between the two lines", "I don't know")),
          across(matches("yellow_line|black_line"), ~fct_expand(.x, "It appears the intervention is working for the student", "It appears the intervention is NOT working for the student", "I cannot tell whether the intervention is working or not")),
