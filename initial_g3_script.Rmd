@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
+library(dplyr)
 library(qualtRics)
 library(here)
 library(readxl)
@@ -118,15 +119,17 @@ final_g3_data %>%
                                         "At grade level",
                                         "Below grade level")) %>% 
   ggplot(aes(x = f1_reading_level)) +
-  geom_bar(position="stack") +
+  geom_bar(position = "stack") +
+  geom_text(aes(label = f1_reading_level), size = 3)
   labs(title = "Student Reading Level",
        subtitle = "Based on teacher observation of ORF score",
        x = "",
        y = "Count") +
   theme_minimal() +
   coord_flip() + 
-# scale_x_discrete(drop = FALSE) +
   scale_color_colorblind()
+
+#I'm trying to create "blank" spaces for the other categories that teacher's didn't answer. I think it would be helpful to use geom_text to label the number of teachers who answered each one. 
 
 ```
 
@@ -134,6 +137,20 @@ Is this student at risk of poor reading outcomes? If you answered "not enough in
 ```{r at risk}
 
 #bar graph followed by a table of further explanation
+
+final_g3_data %>%
+  mutate(f1_at_risk = fct_expand(f1_at_risk, 
+                                 "Yes",
+                                 "No",
+                                 "Not Enough Information")) %>%
+  ggplot(aes(x = f1_at_risk)) +
+  geom_bar(position = "stack") +
+  theme_minimal() +
+  scale_color_colorblind()
+
+
+#why are both of the columns gray and not two different colors?
+
 
 ```
 
@@ -151,7 +168,7 @@ Based on the trajectory of the lines - that is, the shape of the lines - which l
 
 ```
 
-Let's say the figure shows data of a student receiving a reading intervention. For the *YELLOW* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+Let's say the figure shows data of a student receiving a reading intervention. For the Traditional ORF (*YELLOW*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
 ``` {r yellow line}
 
 #table with one column for yellow_line and one column for yellow_line_why
@@ -260,7 +277,7 @@ Let's say the figure shows data of a student receiving a reading intervention. F
 
 ```
 
-Let's say the figure shows data of a student receiving a reading intervention. For the *BLACK* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+Let's say the figure shows data of a student receiving a reading intervention. For the CORE (*BLACK*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
 ```{r black line}
 
 #table with one column for black_line and one column for black_line_why
@@ -355,14 +372,14 @@ Based on the trajectory of the lines - that is, the shape of the lines - which l
 
 ```
 
-Let's say the figure shows data of a student receiving a reading intervention. For the *YELLOW* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+Let's say the figure shows data of a student receiving a reading intervention. For the Traditional ORF (*YELLOW*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
 ``` {r yellow line}
 
 #table with one column for yellow_line and one column for yellow_line_why
 
 ```
 
-Let's say the figure shows data of a student receiving a reading intervention. For the *BLACK* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+Let's say the figure shows data of a student receiving a reading intervention. For the CORE (*BLACK*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
 ```{r black line}
 
 #table with one column for black_line and one column for black_line_why
@@ -457,14 +474,14 @@ Based on the trajectory of the lines - that is, the shape of the lines - which l
 
 ```
 
-Let's say the figure shows data of a student receiving a reading intervention. For the *YELLOW* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+Let's say the figure shows data of a student receiving a reading intervention. For the Traditional ORF (*YELLOW*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
 ``` {r yellow line}
 
 #table with one column for yellow_line and one column for yellow_line_why
 
 ```
 
-Let's say the figure shows data of a student receiving a reading intervention. For the *BLACK* line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+Let's say the figure shows data of a student receiving a reading intervention. For the CORE (*BLACK*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
 ```{r black line}
 
 #table with one column for black_line and one column for black_line_why
