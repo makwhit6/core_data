@@ -105,6 +105,21 @@ When you and your peers discuss student data (for example, in school teams), do 
 
 #bar graph with two columns one for shading and one for measurement_error
 
+final_g3_data %>%
+  select(f1_shading,
+         f1_measurement_error) %>%
+  ggplot(aes(x = f1_shading, y = count, fill = f1_shading)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  coord_flip() #+ 
+  scale_fill_colorblind(drop = FALSE,
+                        breaks=c("Above grade level", "At grade level", "Below grade level")) +
+  scale_x_discrete(drop = FALSE) +
+  labs(title = "Student 1 Reading Level",
+       subtitle = "Based on teacher review of ORF score",
+       x = "",
+       y = "Count",
+       fill = "Reading Level")
+
 ```
 
 The figures that follow are from a third grade student that participated in the 2018-2019 study. Three teachers answered a series of questions pertaining to these figures. The questions are listed below followed by a summary of their answers. 
@@ -120,8 +135,6 @@ The figures that follow are from a third grade student that participated in the 
 
 ```{r f1plotdisplay}
 #insert plot visual here and explanation of plot
-
-#Is there a way to make a "go home" button that follows someone scrolling down the page? That way if they can't remember what the graph looks like they can just be shot back to it. Or is there a way for the graph to move from front and center to the side bar and then follow the person as they are scrolling down the page? 
 
 ```
 
