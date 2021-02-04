@@ -164,6 +164,25 @@ Is this student at risk of poor reading outcomes? If you answered "not enough in
 
 #bar graph followed by a table of further explanation
 
+final_g3_data %>%
+  select(f1_at_risk)
+
+final_g3_data %>%
+  mutate(f1_at_risk = fct_relevel(f1_at_risk, 
+                                        "Yes", 
+                                        "No")) %>% 
+  ggplot(aes(x = f1_at_risk, fill = f1_at_risk)) +
+  geom_bar() +
+  coord_flip() + 
+  scale_fill_colorblind(drop = FALSE,
+                        breaks=c("Yes", "No", "Not enough information")) +
+  scale_x_discrete(drop = FALSE) +
+  labs(title = "At-Risk Levels for Student 1",
+       subtitle = "Based on teacher review of ORF score",
+       x = "",
+       y = "Count",
+       fill = "Reading Level")
+
 
 ```
 
