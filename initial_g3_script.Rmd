@@ -2,7 +2,11 @@
 title: "Grade 3 Data"
 author: "Makayla Whitney, Joe Nese"
 date: "1/21/2021"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_depth: 5
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -18,8 +22,7 @@ library(RColorBrewer)
 library(ggthemes)
 ```
 
-
-```{r g3 data, echo = FALSE}
+```{r data, echo = FALSE}
 qualtrics_api_credentials(api_key = "RLPk714vkWXUHfT5uv5fm0hSyk0a3PBO5t8ouoAR", 
                           base_url = "oregon.qualtrics.com",
                           install = TRUE,
@@ -34,7 +37,7 @@ qual_raw_g3 <- fetch_survey(surveyID = pull(filter(surveys, name == "Grade3_Focu
 ```
 
 
-```{r rename variables, echo = FALSE}
+```{r rename_variables, echo = FALSE}
 rename_fx <- function(x){
   df <- x %>% 
     slice(1:2)
@@ -64,6 +67,22 @@ final_g3_data <- qual_raw_g3 %>%
     values_from = values
   ) %>% 
   unnest(cols = everything())
+```
+
+
+```{r recode, echo = FALSE}
+
+final_g3_data <- final_g3_data %>% 
+  mutate(across(ends_with("reading_level"), ~fct_expand(.x, "Above grade level", "At grade level", "Below grade level")),
+         across(ends_with("at_risk"), ~recode(.x, "Not enough information" = "Not enough information (Please specify what other data would you like to see for this student)")),
+         across(ends_with("at_risk"), ~fct_expand(.x, "Yes", "No", "Not enough information")),
+         across(matches("pm|trust|sbac|last|first|better"), ~recode(.x, "CORE (Black)" = "Black", "Traditional (Yellow)" = "Yellow")),
+         across(matches("pm|trust|sbac|last|first|better"), ~fct_expand(.x,
+           "CORE (Black)", "Traditional (Yellow)", "No difference between the two lines", "I don't know")),
+         across(matches("yellow_line|black_line"), ~fct_expand(.x, "It appears the intervention is working for the student", "It appears the intervention is NOT working for the student", "I cannot tell whether the intervention is working or not")),
+         across(ends_with("shading"), ~fct_expand(.x, "I am very familiar with this concept", "I am a little familiar with this concept", "I am a little unfamiliar with this concept", "I am very unfamiliar with this concept")),
+         across(ends_with("measurement_error"), ~fct_expand(.x, "Yes", "No")),
+         across(ends_with("shaded_area"), ~fct_expand(.x, "Yes", "No", "I still don’t understand the shaded area"))) 
 
 ```
 
@@ -88,9 +107,14 @@ When you and your peers discuss student data (for example, in school teams), do 
 
 The figures that follow are from a third grade student that participated in the 2018-2019 study. Three teachers answered a series of questions pertaining to these figures. The questions are listed below followed by a summary of their answers. 
 
-##Plot 1 (TAB 1)
+# Examples {.tabset .tabset-pills}
+
+## Plot 1 (TAB 1)
+
+<h2 id="plot1" /h2>
 
 ![](plots/original/plot1_gr3_274.jpg)
+
 
 ```{r plot display}
 #insert plot visual here and explanation of plot
@@ -224,8 +248,13 @@ How might you use this figure to make a data-based decision?
 
 ```
 
+<!-- Makayla: Paste the text below wherever you want to insert link to go back to plotN -->
+<a href="#plot1">(Back to Figure)</a>
 
 ##Plot 2 (TAB 2)
+
+<h2 id="plot2" /h2>
+
 ```{r plot display}
 #insert plot visual here and explanation of plot
 
@@ -326,8 +355,12 @@ How might you use this figure to make a data-based decision?
 
 ```
 
+<a href="#plot2">(Back to Figure)</a>
 
 ##Plot 3 (TAB 3)
+
+<h2 id="plot3" /h2>
+
 ```{r plot display}
 #insert plot visual here and explanation of plot
 
@@ -428,8 +461,12 @@ How might you use this figure to make a data-based decision?
 
 ```
 
+<a href="#plot3">(Back to Figure)</a>
 
 ##Plot 4 (TAB 4)
+
+<h2 id="plot4" /h2>
+
 ```{r plot display}
 #insert plot visual here and explanation of plot
 
@@ -529,3 +566,8 @@ How might you use this figure to make a data-based decision?
 #block quotes
 
 ```
+
+<a href="#plot4">(Back to Figure)</a>
+
+<!-- end tabset -->
+# {-}
