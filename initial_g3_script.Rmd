@@ -10,7 +10,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 
 library(tidyverse)
 library(dplyr)
@@ -105,21 +105,6 @@ When you and your peers discuss student data (for example, in school teams), do 
 
 #bar graph with two columns one for shading and one for measurement_error
 
-final_g3_data %>%
-  select(f1_shading,
-         f1_measurement_error) %>%
-  ggplot(aes(x = f1_shading, y = count, fill = f1_shading)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  coord_flip() #+ 
-  scale_fill_colorblind(drop = FALSE,
-                        breaks=c("Above grade level", "At grade level", "Below grade level")) +
-  scale_x_discrete(drop = FALSE) +
-  labs(title = "Student 1 Reading Level",
-       subtitle = "Based on teacher review of ORF score",
-       x = "",
-       y = "Count",
-       fill = "Reading Level")
-
 ```
 
 The figures that follow are from a third grade student that participated in the 2018-2019 study. Three teachers answered a series of questions pertaining to these figures. The questions are listed below followed by a summary of their answers. 
@@ -142,9 +127,9 @@ For the first plot, the student's fall easyCBM oral reading fluency (ORF) score 
 
 ```{r f1leveldescriptions, results = "asis"}
 
-#table 
-
-kable(final_g3_data["f1_level_description"], caption = "Teacher Description of Student's Level")
+final_g3_data %>%
+  select(f1_level_description) %>%
+  kable(col.names = c("Plot 1 Student Level Descriptions"))
 
 ```
 
@@ -153,7 +138,6 @@ Based on this fall ORF score, the student is reading:
 
 janitor::tabyl(final_g3_data$f1_reading_level)
 
-#bar graph
 final_g3_data %>%
   mutate(f1_reading_level = fct_relevel(f1_reading_level, 
                                         "Below grade level", 
@@ -176,34 +160,34 @@ final_g3_data %>%
 Is this student at risk of poor reading outcomes? If you answered "not enough information," please specify what other data you would like to see for this student.
 ```{r f1atrisk}
 
-#bar graph followed by a table of further explanation
+janitor::tabyl(final_g3_data$f1_at_risk)
 
 final_g3_data %>%
-  select(f1_at_risk)
-
-final_g3_data %>%
+  select(f1_at_risk) %>%
   mutate(f1_at_risk = fct_relevel(f1_at_risk, 
-                                        "Yes", 
-                                        "No")) %>% 
+                                  "Not enough information", 
+                                  "No")) %>% 
   ggplot(aes(x = f1_at_risk, fill = f1_at_risk)) +
   geom_bar() +
   coord_flip() + 
   scale_fill_colorblind(drop = FALSE,
-                        breaks=c("Yes", "No", "Not enough information")) +
+                        breaks=c("Yes", 
+                                 "No", 
+                                 "Not enough information")) +
   scale_x_discrete(drop = FALSE) +
   labs(title = "At-Risk Levels for Student 1",
        subtitle = "Based on teacher review of ORF score",
        x = "",
        y = "Count",
-       fill = "Reading Level")
-
-
+       fill = "At Risk Student")
 ```
+
+If specified "not enough information":
+>"I would like to see a phonics/decoding screener to determine if the fluency rate is lower because of decoding issues."
+>"Without hearing the passage being read, one can not determine where the child has difficulty. Nor is there any evidence of comprehension. Even a slower reader can indicate comprehension with intonations."
 
 Which line might be better for progress monitoring? And why?
 ```{r f1pmline, results = "asis"}
-
-#table with one column for pm_line and one column for pm_line_why
 
 final_g3_data %>%
   select(f1_pm_line,
@@ -215,65 +199,161 @@ final_g3_data %>%
 Based on the trajectory of the lines - that is, the shape of the lines - which line might be more trustworthy? And why?
 ```{r f1trustline}
 
-#table with one column for trust_line and one column for trust_line_why
+final_g3_data %>%
+  select(f1_trust_line,
+         f1_trust_line_why) %>%
+  kable(col.names = c("More Trustworthy Line", "Why?"))
 
 ```
 
 Let's say the figure shows data of a student receiving a reading intervention. For the Traditional ORF (*YELLOW*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
 ``` {r f1yellowline}
 
-#table with one column for yellow_line and one column for yellow_line_why
+final_g3_data %>%
+  select(f1_yellow_line,
+         f1_yellow_line_why) %>%
+  kable(col.names = c("Intervention Description Based on ORF Line", "Why?"))
 
 ```
 
 Let's say the figure shows data of a student receiving a reading intervention. For the CORE (*BLACK*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
 ```{r f1blackline}
 
-#table with one column for black_line and one column for black_line_why
+final_g3_data %>%
+  select(f1_black_line,
+         f1_black_line_why) %>%
+  kable(col.names = c("Intervention Description Based on CORE Line", "Why?"))
 
 ```
 
 Which line might better correspond with the SBAC performance level?
 ```{r f1SBAC}
 
-#bar graph
+janitor::tabyl(final_g3_data$f1_sbac)
+
+final_g3_data %>%
+  select(f1_sbac) %>%
+  mutate(f1_sbac = fct_relevel(f1_sbac, 
+                               "I don't know", 
+                               "No difference between the two lines",
+                               "CORE (Black)",
+                               "Traditional (Yellow)")) %>% 
+  ggplot(aes(x = f1_sbac, fill = f1_sbac)) +
+  geom_bar() +
+  coord_flip() + 
+  scale_fill_colorblind(drop = FALSE,
+                        breaks=c("Traditional (Yellow)",
+                                 "CORE (Black)",
+                                 "No difference between the two lines",
+                                 "I don't know")) +
+  scale_x_discrete(drop = FALSE) +
+  labs(title = "Correspondance with SBAC performance level",
+       subtitle = "Based on teacher review of ORF score",
+       x = "",
+       y = "Count",
+       fill = "Correspondance Level")
 
 ```
 
 Based on the last data point from May or June ONLY, which point might better match what you expect from a student at this performance level?
 ```{r f1lastpoint}
 
-#bar graph
+janitor::tabyl(final_g3_data$f1_last_point)
+
+final_g3_data %>%
+  select(f1_last_point) %>%
+  mutate(f1_last_point = fct_relevel(f1_last_point,
+                               "I don't know", 
+                               "No difference between the two lines",
+                               "CORE (Black)",
+                               "Traditional (Yellow)")) %>% 
+  ggplot(aes(x = f1_last_point, fill = f1_last_point)) +
+  geom_bar() +
+  coord_flip() + 
+  scale_fill_colorblind(drop = FALSE,
+                        breaks=c("Traditional (Yellow)",
+                                 "CORE (Black)",
+                                 "No difference between the two lines",
+                                 "I don't know")) +
+  scale_x_discrete(drop = FALSE) +
+  labs(title = "Correspondance with last data point",
+       subtitle = "Based on teacher review of ORF score",
+       x = "",
+       y = "Count",
+       fill = "Correspondance Level")
 
 ```
 
 Based on the first data point from October or November ONLY, which point might better match what you expect from a student at this performance level?
 ```{r f1firstpoint}
 
-#bar graph
+janitor::tabyl(final_g3_data$f1_first_point)
+
+final_g3_data %>%
+  select(f1_first_point) %>%
+  mutate(f1_first_point = fct_relevel(f1_first_point,
+                               "I don't know", 
+                               "No difference between the two lines",
+                               "CORE (Black)",
+                               "Traditional (Yellow)")) %>% 
+  ggplot(aes(x = f1_first_point, fill = f1_first_point)) +
+  geom_bar() +
+  coord_flip() + 
+  scale_fill_colorblind(drop = FALSE,
+                        breaks=c("Traditional (Yellow)",
+                                 "CORE (Black)",
+                                 "No difference between the two lines",
+                                 "I don't know")) +
+  scale_x_discrete(drop = FALSE) +
+  labs(title = "Correspondance with first data point",
+       subtitle = "Based on teacher review of ORF score",
+       x = "",
+       y = "Count",
+       fill = "Correspondance Level")
 
 ```
 
 Which line might be better for progress monitoring and data-based decisions?
 ```{r f1betterline}
 
-#table with one column for better_line and one column for better_line_why
-
+final_g3_data %>%
+  select(f1_better_line,
+         f1_better_line_why) %>%
+  kable(col.names = c("Better Line", "Why?"))
 ```
 
 Does the shaded area in the graphs give you useful information if you were using the graphs to make data-based decisions?
 ```{r f1_shaded_area}
 
-#bar graph
+janitor::tabyl(final_g3_data$f1_shaded_area)
+
+final_g3_data %>%
+  select(f1_shaded_area) %>%
+  mutate(f1_shaded_area = fct_relevel(f1_shaded_area,
+                                      "I still don't understand the shaded area",
+                                      "No",
+                                      "Yes")) %>% 
+  ggplot(aes(x = f1_shaded_area, fill = f1_shaded_area)) +
+  geom_bar() +
+  coord_flip() + 
+  scale_fill_colorblind(drop = FALSE,
+                        breaks=c("Yes",
+                                 "No",
+                                 "I still don't understand the shaded area")) +
+  scale_x_discrete(drop = FALSE) +
+  labs(title = "Is the shaded area helpful?",
+       subtitle = "Based on teacher review of ORF score",
+       x = "",
+       y = "Count",
+       fill = "Helpful")
 
 ```
 
 How might you use this figure to make a data-based decision?
-```{r f1decisions}
 
-#block quotes
-
-```
+>"Even though the yellow graph shows a greater measurement error, this student is making adequate progress. The student with the black graph definitely benefits from progress monitoring."
+>"It would allow me to identify the student I would want to read with first and see where I need to target our learning. But these numbers are only numbers. There is never enough information."
+>"The student may be only borderline proficient and based on the gray area might want to be assigned to a slightly lower level reading group if groups are being used."
 
 <!-- Makayla: Paste the text below wherever you want to insert link to go back to plotN -->
 <a href="#plot1">(Back to Figure)</a>
