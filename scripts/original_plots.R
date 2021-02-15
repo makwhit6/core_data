@@ -136,6 +136,11 @@ map2(paste0("plot1_gr", plots$grade, "_", plots$student_id, ".jpg"), plots$plot1
 map2(paste0("ploterror_gr", plots$grade, "_", plots$student_id, ".jpg"), plots$ploterror, 
      ~ggsave(.x, .y, path = here::here("plots", "original")))
 
+map2(plots$plot1, paste0("plot1_gr", plots$grade, "_", plots$student_id, ".rds"), 
+     ~write_rds(.x, here::here("plots", "original", .y)))
+
+map2(plots$ploterror, paste0("ploterror_gr", plots$grade, "_", plots$student_id, ".rds"), 
+     ~write_rds(.x, here::here("plots", "original", .y)))
 
 data_samples %>%
   select(student_id, grade) %>% 
