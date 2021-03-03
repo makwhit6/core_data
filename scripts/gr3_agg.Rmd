@@ -141,7 +141,7 @@ The below figures are representative of 3rd grade student scores. Please refer b
 #     imgs = map(plot, ~ggplot() + background_image(.x) + coord_fixed()))
 
 figs <- tibble(
-  name = fs::dir_ls(here(here::here("plots", "original")), regexp = "plot1.*gr3.*rds"),
+  name = fs::dir_ls(here::here("plots", "original"), regexp = "plot1.*gr3.*rds"),
   plot = map(name, ~read_rds(.) + theme(aspect.ratio=4/3))#coord_fixed(ratio = 4))
 )
 
@@ -212,10 +212,15 @@ long %>%
     response = md("**Response**")
   )
 ```
+<br>
+<br>
+<p style="color:blue; font-size: 20px;">
 
-> #### Reading Level Analysis
->
-> Based on all of the third grade ORF scores, all three teachers unanimously agreed that these students fell below 3rd grade reading level and would be considered at risk. 
+Results: Based on all of the third grade ORF scores, all three teachers unanimously agreed that these students fell below 3rd grade reading level and would be considered at risk.
+
+</p>
+<br>
+<br>
 
 #### **At Risk?**
 
@@ -264,7 +269,7 @@ long %>%
 
 #### **Progress Monitoring**
 
-##### Which line might be better for progress monitoring? And why?
+#### Which line might be better for progress monitoring? And why?
 
 ```{r}
 long %>%
@@ -550,7 +555,7 @@ long %>%
 ```{r msrerror, fig.width=8}
 
 figs2 <- tibble(
-  name = fs::dir_ls(here(here::here("plots", "original")), regexp = "ploterror.*gr3.*rds"),
+  name = fs::dir_ls(here::here("plots", "original"), regexp = "ploterror.*gr3.*rds"),
   plot = map(name, ~read_rds(.) + theme(aspect.ratio = 4/3))#coord_fixed(ratio = 4))
 )
 
