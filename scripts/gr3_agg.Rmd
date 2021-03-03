@@ -121,9 +121,9 @@ long <- final_g3_data %>%
 
 ## Grade 3
 
-### Student Figures
+### **Student Figures**
 
-The below figures are representative of 3rd grade student scores. Please refer back to these figures when observing the data collected from teacher surveys. 
+**The below figures are representative of 3rd grade student scores. Please refer back to these figures when observing the data collected from teacher surveys.**
 
 ```{r}
 
@@ -169,7 +169,7 @@ figs$plot[[1]] + figs$plot[[2]]
 
 #### **Reading Level**
 
-##### Based on the fall ORF score, the student is reading:
+#### **Based on the fall ORF score, the student is reading:**
 
 ```{r}
 
@@ -193,7 +193,7 @@ long %>%
 
 ```
 
-##### Below are descriptions of the student's reading level based on fall ORF score alone. 
+#### *Below are descriptions of the student's reading level based on fall ORF score alone.*
 
 ```{r}
 long %>%
@@ -224,7 +224,7 @@ Results: Based on all of the third grade ORF scores, all three teachers unanimou
 
 #### **At Risk?**
 
-##### Is this student at risk of poor reading outcomes? 
+#### *Is this student at risk of poor reading outcomes?* 
 
 ```{r}
 
@@ -250,7 +250,7 @@ long %>%
 
 ```
 
-##### If you answered "not enough information," please specify what other data you would like to see for this student.
+#### *If you answered "not enough information," please specify what other data you would like to see for this student.*
 
 ```{r}
 long %>%
@@ -269,7 +269,7 @@ long %>%
 
 #### **Progress Monitoring**
 
-#### Which line might be better for progress monitoring? And why?
+#### *Which line might be better for progress monitoring? And why?*
 
 ```{r}
 long %>%
@@ -348,7 +348,7 @@ For most of the plots, teachers agreed that there was little difference between 
 
 #### **Trustworthy Trajectory**
 
-##### Based on the trajectory of the lines - that is, the shape of the lines - which line might be more trustworthy? And why?
+#### *Based on the trajectory of the lines - that is, the shape of the lines - which line might be more trustworthy? And why?*
 
 ```{r f1trustline}
 
@@ -408,7 +408,7 @@ long %>%
 ```
 
 
-##### Let's say the figure shows data of a student receiving a reading intervention. For the Traditional ORF (*YELLOW*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+#### **Let's say the figure shows data of a student receiving a reading intervention. For the Traditional ORF (*YELLOW*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?**
 
 ``` {r f1yellowline}
 
@@ -431,7 +431,7 @@ long %>%
 #Student is repeated twice in this chart. 
 ```
 
-##### Let's say the figure shows data of a student receiving a reading intervention. For the CORE (*BLACK*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
+#### **Let's say the figure shows data of a student receiving a reading intervention. For the CORE (*BLACK*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?**
 
 ```{r f1blackline}
 
@@ -461,7 +461,7 @@ long %>%
 
 #### **State Reading Test Score**
 
-##### Which line might better correspond with the SBAC performance level?
+#### **Which line might better correspond with the SBAC performance level?**
 
 ```{r}
 long %>%
@@ -488,7 +488,7 @@ long %>%
 
 ```
 
-##### Based on the last data point from **May or June** ONLY, which point might better match what you expect from a student at this SBAC performance level?
+#### **Based on the last data point from *May or June* ONLY, which point might better match what you expect from a student at this SBAC performance level?**
 
 ```{r lastpoint}
 
@@ -516,7 +516,7 @@ long %>%
 
 ```
 
-##### Based on the first data point from **October or November** ONLY, which point might better match what you expect from a student at this SBAC performance level?
+#### **Based on the first data point from *October or November* ONLY, which point might better match what you expect from a student at this SBAC performance level?**
 
 ```{r firstpoint}
 
@@ -550,7 +550,7 @@ long %>%
 > - Neither line corresponded better with the SBAC performance level
 > - For both the first and last data points, many teachers noted the lack of difference between lines displayed. Those that did observe a difference found the ORF (yellow) line to correspond more effectively in both circumstances.
 
-### Student Figures with Measurement Error
+### **Student Figures with Measurement Error**
 
 ```{r msrerror, fig.width=8}
 
@@ -583,7 +583,7 @@ figs2$plot[[3]] + figs2$plot[[4]]
 
 #### **Progress Monitoring and Data-Based Decisions**
 
-##### Which line might be better for progress monitoring and data-based decisions?
+#### **Which line might be better for progress monitoring and data-based decisions?**
 
 ```{r f1betterline}
 
@@ -612,7 +612,7 @@ long %>%
 
 #### **Measurement Error Useful?**
 
-##### Does the shaded area in the graphs give you useful information if you were using the graphs to make data-based decisions?
+#### **Does the shaded area in the graphs give you useful information if you were using the graphs to make data-based decisions?**
 
 ```{r}
 
@@ -639,7 +639,7 @@ long %>%
 
 ```
 
-##### How might you use this figure to make a data-based decision?
+#### **How might you use this figure to make a data-based decision?**
 
 ```{r}
 long %>% 
