@@ -123,6 +123,8 @@ long <- final_g3_data %>%
 
 ### Student Figures
 
+The below figures are representative of 3rd grade student scores. Please refer back to these figures when observing the data collected from teacher surveys. 
+
 ```{r}
 
 # imgs <- tibble(
@@ -165,7 +167,7 @@ figs$plot[[1]] + figs$plot[[2]]
 ```
 
 
-#### (1) Reading Level
+#### **Reading Level**
 
 ##### Based on the fall ORF score, the student is reading:
 
@@ -211,7 +213,11 @@ long %>%
   )
 ```
 
-#### (2) At Risk?
+> #### Reading Level Analysis
+>
+> Based on all of the third grade ORF scores, all three teachers unanimously agreed that these students fell below 3rd grade reading level and would be considered at risk. 
+
+#### **At Risk?**
 
 ##### Is this student at risk of poor reading outcomes? 
 
@@ -251,7 +257,12 @@ long %>%
   
 ```
 
-#### (3) Progress Monitoring
+> #### At Risk Analysis
+>
+> Many teachers believe these students are at risk of poor reading outcomes. When asked to further explain, many teachers felt they didn't have enough information. To make a conclusive decision about the student, teachers would need to either hear a recording of the student or watch the student read aloud. This would improve their knowledge of the student's decoding skills, reading pace, and pausing habits. 
+
+
+#### **Progress Monitoring**
 
 ##### Which line might be better for progress monitoring? And why?
 
@@ -324,11 +335,13 @@ walk(pm$tbles, print)
 
 ```
 
-<p style="color:red">
-This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. 
+> #### Progress Monitoring Analysis
+
+<p style="color:blue">
+For most of the plots, teachers agreed that there was little difference between the two lines. Common aspects pointed out included slow progress and similar direction.  
 </p>
 
-#### Trustworthy Trajectory
+#### **Trustworthy Trajectory**
 
 ##### Based on the trajectory of the lines - that is, the shape of the lines - which line might be more trustworthy? And why?
 
@@ -352,10 +365,14 @@ long %>%
 
 ```
 
-#### Intervention Working?
+> #### Trustworthy Trajectory Analysis
+>
+> While most teachers noted the lack of difference between lines, a few stated that the CORE line appears to be more trustworthy. They pointed out that the sharp decline in the ORF (yellow) line may be due to extenuating circumstances unknown to them. 
+
+
+#### **Intervention Working?**
 
 ```{r}
- 
 
 long %>%
   mutate(Student = paste0("Student ", Student)) %>% 
@@ -405,6 +422,8 @@ long %>%
   cols_label(
     yellow_line_why = md("")) 
 
+
+#Student is repeated twice in this chart. 
 ```
 
 ##### Let's say the figure shows data of a student receiving a reading intervention. For the CORE (*BLACK*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?
@@ -426,9 +445,16 @@ long %>%
   cols_label(
     black_line_why = md("")) 
 
+#Student is repeated twice in this chart. 
+
 ```
 
-#### State Reading Test Score
+> #### Intervention Analysis
+>
+> Teachers across the board agreed that the intervention is working for student D based on the data displayed. Teachers believed that the intervention was either not working or they were unable to interpret the data for student A. Students B and C were also difficult for teachers to interpret, but overall they displayed an understanding that the intervention was working. If teachers were unable to tell whether the intervention was working or not, they stated the need to listen to the student in order to diagnose their progress. 
+
+
+#### **State Reading Test Score**
 
 ##### Which line might better correspond with the SBAC performance level?
 
@@ -513,6 +539,12 @@ long %>%
 
 ```
 
+> #### SBAC Correspondance Analysis
+> 
+> The following trends were observed across teacher responses:
+> - Neither line corresponded better with the SBAC performance level
+> - For both the first and last data points, many teachers noted the lack of difference between lines displayed. Those that did observe a difference found the ORF (yellow) line to correspond more effectively in both circumstances.
+
 ### Student Figures with Measurement Error
 
 ```{r msrerror, fig.width=8}
@@ -544,7 +576,7 @@ figs2$plot[[3]] + figs2$plot[[4]]
 ```
 
 
-#### Progress Monitoring and Data-Based Decisions
+#### **Progress Monitoring and Data-Based Decisions**
 
 ##### Which line might be better for progress monitoring and data-based decisions?
 
@@ -568,7 +600,12 @@ long %>%
 
 ```
 
-#### Measurement Error Useful?
+> #### Decision Making Analysis
+>
+> A majority of teachers noted the lack of difference between lines and the same trend observed in both data sets. 
+
+
+#### **Measurement Error Useful?**
 
 ##### Does the shaded area in the graphs give you useful information if you were using the graphs to make data-based decisions?
 
@@ -608,5 +645,9 @@ long %>%
   cols_label(
     response = md("Response"),
     Teacher = (""))
- ```
+```
+
+> #### Shaded Area Analysis
+>
+> A majority of teachers stated that the shaded area was helpful when observing the data. Common applications of the measurement error included early identification, understanding the range a student falls within, and as a guide for implementing assistance in the future. 
 
