@@ -14,8 +14,6 @@ knitr::opts_chunk$set(echo = FALSE,
                       warning = FALSE)
 
 library(tidyverse)
-library(dplyr)
-library(qualtRics)
 library(here)
 library(readxl)
 library(knitr)
@@ -28,29 +26,7 @@ library(fs)
 theme_set(theme_minimal())
 ```
 
-```{r data, eval=FALSE}
-qualtrics_api_credentials(api_key = "RLPk714vkWXUHfT5uv5fm0hSyk0a3PBO5t8ouoAR", 
-                          base_url = "oregon.qualtrics.com",
-                          install = TRUE,
-                          overwrite = TRUE)
 
-readRenviron("~/.Renviron")
-
-surveys <- all_surveys()
-
-qual_raw_g2 <- fetch_survey(surveyID = pull(filter(surveys, name == "Grade2_Focus-Group-Survey"), id), 
-                            force_request = TRUE)
-
-qual_raw_g3 <- fetch_survey(surveyID = pull(filter(surveys, name == "Grade3_Focus-Group-Survey"), id), 
-                            force_request = TRUE)
-
-qual_raw_g4 <- fetch_survey(surveyID = pull(filter(surveys, name == "Grade4_Focus-Group-Survey"), id), 
-                            force_request = TRUE)
-
-write_csv(qual_raw_g2, here("data", "qual_raw_g2.csv"))
-write_csv(qual_raw_g3, here("data", "qual_raw_g3.csv"))
-write_csv(qual_raw_g4, here("data", "qual_raw_g4.csv"))
-```
 
 ```{r}
 qual_raw_g2 <- read_csv(here("data", "qual_raw_g2.csv"))
@@ -109,7 +85,7 @@ final_g2_data <- qual_raw_g2 %>%
 long_g2 <- final_g2_data %>% 
   mutate(Teacher = paste0("Teacher ", row_number())) %>% 
   pivot_longer(
-    cols = -c(email, Teacher),
+    cols = -c(Teacher),
     names_to = "item",
     values_to = "response"
   ) %>% 
@@ -279,7 +255,6 @@ long_g2 %>%
 ```{r}
 long_g2 %>%
   filter(str_detect(item, "pm_line")) %>%
-  select(-email) %>% 
   pivot_wider(
     names_from = item,
     values_from = response
@@ -326,7 +301,6 @@ long_g2 %>%
 ```{r}
 pm_g2 <- long_g2 %>%
   filter(str_detect(item, "pm_line")) %>%
-  select(-email) %>% 
   pivot_wider(
     names_from = item,
     values_from = response
@@ -375,7 +349,6 @@ pm_g2$tbles[[1]]
 
 long_g2 %>%
   filter(str_detect(item, "trust_line")) %>%
-  select(-email) %>% 
    pivot_wider(
     names_from = item,
     values_from = response
@@ -445,7 +418,6 @@ long_g2 %>%
 long_g2 %>%
   mutate(Student = paste0("Student ", Student)) %>% 
   filter(str_detect(item, "yellow_line")) %>%
-  select(-email) %>% 
    pivot_wider(
     names_from = item,
     values_from = response
@@ -470,7 +442,6 @@ long_g2 %>%
 long_g2 %>%
   mutate(Student = paste0("Student ", Student)) %>% 
   filter(str_detect(item, "black_line")) %>%
-  select(-email) %>% 
    pivot_wider(
     names_from = item,
     values_from = response
@@ -535,7 +506,6 @@ figs2_g4$plot[[3]] + figs2_g4$plot[[4]]
 long_g2 %>%
   mutate(Student = paste0("Student ", Student)) %>%
   filter(str_detect(item, "better_line")) %>%
-  select(-email) %>% 
   pivot_wider(
     names_from = item,
     values_from = response
@@ -677,7 +647,7 @@ final_g3_data <- final_g3_data %>%
 long_g3 <- final_g3_data %>% 
   mutate(Teacher = paste0("Teacher ", row_number())) %>% 
   pivot_longer(
-    cols = -c(email, Teacher),
+    cols = -c(Teacher),
     names_to = "item",
     values_to = "response"
   ) %>% 
@@ -848,7 +818,6 @@ long_g3 %>%
 ```{r}
 long_g3 %>%
   filter(str_detect(item, "pm_line")) %>%
-  select(-email) %>% 
   pivot_wider(
     names_from = item,
     values_from = response
@@ -897,7 +866,6 @@ long_g3 %>%
 ```{r, results="asis"}
 pm_g3 <- long_g3 %>%
   filter(str_detect(item, "pm_line")) %>%
-  select(-email) %>% 
   pivot_wider(
     names_from = item,
     values_from = response
@@ -942,7 +910,6 @@ walk(pm_g3$tbles, print)
 
 long_g3 %>%
   filter(str_detect(item, "trust_line")) %>%
-  select(-email) %>% 
    pivot_wider(
     names_from = item,
     values_from = response
@@ -1012,7 +979,6 @@ long_g3 %>%
 long_g3 %>%
   mutate(Student = paste0("Student ", Student)) %>% 
   filter(str_detect(item, "yellow_line")) %>%
-  select(-email) %>% 
    pivot_wider(
     names_from = item,
     values_from = response
@@ -1038,7 +1004,6 @@ long_g3 %>%
 long_g3 %>%
   mutate(Student = paste0("Student ", Student)) %>% 
   filter(str_detect(item, "black_line")) %>%
-  select(-email) %>% 
    pivot_wider(
     names_from = item,
     values_from = response
@@ -1207,7 +1172,6 @@ figs2$plot[[3]] + figs2$plot[[4]]
 long_g3 %>%
   mutate(Student = paste0("Student ", Student)) %>%
   filter(str_detect(item, "better_line")) %>%
-  select(-email) %>% 
   pivot_wider(
     names_from = item,
     values_from = response
@@ -1327,7 +1291,7 @@ final_g4_data <- qual_raw_g4 %>%
 long_g4 <- final_g4_data %>% 
   mutate(Teacher = paste0("Teacher ", row_number())) %>% 
   pivot_longer(
-    cols = -c(email, Teacher),
+    cols = -c(Teacher),
     names_to = "item",
     values_to = "response"
   ) %>% 
@@ -1496,7 +1460,6 @@ long_g4 %>%
 ```{r}
 long_g4 %>%
   filter(str_detect(item, "pm_line")) %>%
-  select(-email) %>% 
   pivot_wider(
     names_from = item,
     values_from = response
@@ -1543,7 +1506,6 @@ long_g4 %>%
 ```{r}
 pm_g4 <- long_g4 %>%
   filter(str_detect(item, "pm_line")) %>%
-  select(-email) %>% 
   pivot_wider(
     names_from = item,
     values_from = response
@@ -1594,7 +1556,6 @@ pm_g4$tbles[[4]]
 
 long_g4 %>%
   filter(str_detect(item, "trust_line")) %>%
-  select(-email) %>% 
    pivot_wider(
     names_from = item,
     values_from = response
@@ -1664,7 +1625,6 @@ long_g4 %>%
 long_g4 %>%
   mutate(Student = paste0("Student ", Student)) %>% 
   filter(str_detect(item, "yellow_line")) %>%
-  select(-email) %>% 
    pivot_wider(
     names_from = item,
     values_from = response
@@ -1689,7 +1649,6 @@ long_g4 %>%
 long_g4 %>%
   mutate(Student = paste0("Student ", Student)) %>% 
   filter(str_detect(item, "black_line")) %>%
-  select(-email) %>% 
    pivot_wider(
     names_from = item,
     values_from = response
@@ -1853,7 +1812,6 @@ figs2_g4$plot[[3]] + figs2_g4$plot[[4]]
 long_g4 %>%
   mutate(Student = paste0("Student ", Student)) %>%
   filter(str_detect(item, "better_line")) %>%
-  select(-email) %>% 
   pivot_wider(
     names_from = item,
     values_from = response
