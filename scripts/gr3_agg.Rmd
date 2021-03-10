@@ -166,10 +166,13 @@ figs$plot[[1]] + figs$plot[[2]]
 
 ```
 
+<br>
+<br>
 
 #### **Reading Level**
+<br>
 
-#### **Based on the fall ORF score, the student is reading:**
+##### **Based on the fall ORF score, the student is reading:**
 
 ```{r}
 
@@ -193,7 +196,9 @@ long %>%
 
 ```
 
-#### *Below are descriptions of the student's reading level based on fall ORF score alone.*
+<br>
+
+##### **Below are descriptions of the student's reading level based on fall ORF score alone.**
 
 ```{r}
 long %>%
@@ -204,27 +209,33 @@ long %>%
       select(Student, orf), 
     by = c("Student")
   ) %>% 
-  select(Student, orf, response) %>% 
+  select(Student, Teacher, orf, response) %>% 
+  group_by(Student) %>% 
   gt() %>% 
   cols_label(
+    Teacher = md("**Teacher**"),
     Student = md("**Student**"),
     orf = md("**ORF**"),
     response = md("**Response**")
+  ) %>% 
+  tab_options(
+    data_row.padding = gt::px(3),
+    heading.title.font.size = "small",
+    table.font.size = "12px"
   )
 ```
 <br>
 <br>
-<p style="color:blue; font-size: 20px;">
-
-Results: Based on all of the third grade ORF scores, all three teachers unanimously agreed that these students fell below 3rd grade reading level and would be considered at risk.
-
+<p style="color:#009E73; font-size:20px">
+<b>Results:</b> Based on all of the third grade ORF scores, all three teachers unanimously agreed that these students fell below 3rd grade reading level and would be considered at risk.
 </p>
 <br>
 <br>
 
 #### **At Risk?**
+<br>
 
-#### *Is this student at risk of poor reading outcomes?* 
+##### **Is this student at risk of poor reading outcomes?**
 
 ```{r}
 
@@ -250,7 +261,9 @@ long %>%
 
 ```
 
-#### *If you answered "not enough information," please specify what other data you would like to see for this student.*
+<br>
+
+##### **If you answered "not enough information," please specify what other data you would like to see for this student.**
 
 ```{r}
 long %>%
@@ -262,14 +275,18 @@ long %>%
   
 ```
 
-> #### At Risk Analysis
->
-> Many teachers believe these students are at risk of poor reading outcomes. When asked to further explain, many teachers felt they didn't have enough information. To make a conclusive decision about the student, teachers would need to either hear a recording of the student or watch the student read aloud. This would improve their knowledge of the student's decoding skills, reading pace, and pausing habits. 
-
+<br>
+<br>
+<p style="color:#009E73; font-size:20px">
+<b>Results:</b> Many teachers believe these students are at risk of poor reading outcomes. When asked to further explain, many teachers felt they didn't have enough information. To make a conclusive decision about the student, teachers would need to either hear a recording of the student or watch the student read aloud. This would improve their knowledge of the student's decoding skills, reading pace, and pausing habits. 
+</p>
+<br>
+<br>
 
 #### **Progress Monitoring**
+<br>
 
-#### *Which line might be better for progress monitoring? And why?*
+##### **Which line might be better for progress monitoring? And why?**
 
 ```{r}
 long %>%
@@ -285,7 +302,12 @@ long %>%
   gt::gt(rowname_col = "Student", groupname_col = "pm_line") %>% 
   cols_label(
     pm_line_why = md("**Why?**"),
-    Teacher = md("")) 
+    Teacher = md("")) %>% 
+  tab_options(
+    data_row.padding = gt::px(3),
+    heading.title.font.size = "small",
+    table.font.size = "12px"
+  )
 #  kable(col.names = c("Student", "Progress Monitoring Line", "Why?"))
 ```
 
@@ -331,7 +353,11 @@ pm <- long %>%
     tbles = map2(data, pm_line,
                  ~gt(.x) %>% 
                    cols_label(pm_line_why = "") %>% 
-                   tab_header(title = md(paste0("**", .y, "**")))
+                   tab_header(title = md(paste0("**", .y, "**"))) %>% 
+                     tab_options(
+                        data_row.padding = gt::px(3),
+                        heading.title.font.size = "small",
+                        table.font.size = "12px")
     )
   )
 
@@ -340,15 +366,18 @@ walk(pm$tbles, print)
 
 ```
 
-> #### Progress Monitoring Analysis
-
-<p style="color:blue">
-For most of the plots, teachers agreed that there was little difference between the two lines. Common aspects pointed out included slow progress and similar direction.  
+<br>
+<br>
+<p style="color:#009E73; font-size:20px">
+<b>Results:</b> For most of the plots, teachers agreed that there was little difference between the two lines. Common aspects pointed out included slow progress and similar direction.
 </p>
+<br>
+<br>
 
 #### **Trustworthy Trajectory**
+<br>
 
-#### *Based on the trajectory of the lines - that is, the shape of the lines - which line might be more trustworthy? And why?*
+##### **Based on the trajectory of the lines - that is, the shape of the lines - which line might be more trustworthy? And why?**
 
 ```{r f1trustline}
 
@@ -365,17 +394,26 @@ long %>%
   gt::gt(rowname_col = "Student", groupname_col = "trust_line") %>% 
   cols_label(
     trust_line_why = md("**Why?**"),
-    Teacher = md("")) 
+    Teacher = md("")) %>% 
+  tab_options(
+    data_row.padding = gt::px(3),
+    heading.title.font.size = "small",
+    table.font.size = "12px"
+  )
 #  kable(col.names = c("Student", "Most Trustworthy Line", "Why?"))
 
 ```
 
-> #### Trustworthy Trajectory Analysis
->
-> While most teachers noted the lack of difference between lines, a few stated that the CORE line appears to be more trustworthy. They pointed out that the sharp decline in the ORF (yellow) line may be due to extenuating circumstances unknown to them. 
-
+<br>
+<br>
+<p style="color:#009E73; font-size:20px">
+<b>Results:</b> While most teachers noted the lack of difference between lines, a few stated that the CORE line appears to be more trustworthy. They pointed out that the sharp decline in the ORF (Yellow) line may be due to extenuating circumstances unknown to them. 
+</p>
+<br>
+<br>
 
 #### **Intervention Working?**
+<br>
 
 ```{r}
 
@@ -407,8 +445,8 @@ long %>%
 
 ```
 
-
-#### **Let's say the figure shows data of a student receiving a reading intervention. For the Traditional ORF (*YELLOW*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?**
+<br>
+##### **Let's say the figure shows data of a student receiving a reading intervention. For the Traditional ORF (*YELLOW*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?**
 
 ``` {r f1yellowline}
 
@@ -425,13 +463,16 @@ long %>%
 #  group_by(yellow_line) %>% 
   gt::gt(rowname_col = "Student", groupname_col = "yellow_line") %>% 
   cols_label(
-    yellow_line_why = md("")) 
-
-
-#Student is repeated twice in this chart. 
+    yellow_line_why = md("")) %>% 
+  tab_options(
+    data_row.padding = gt::px(3),
+    heading.title.font.size = "small",
+    table.font.size = "12px"
+  )
 ```
 
-#### **Let's say the figure shows data of a student receiving a reading intervention. For the CORE (*BLACK*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?**
+<br>
+##### **Let's say the figure shows data of a student receiving a reading intervention. For the CORE (*BLACK*) line, look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? And why?**
 
 ```{r f1blackline}
 
@@ -448,20 +489,27 @@ long %>%
 #  group_by(yellow_line) %>% 
   gt::gt(rowname_col = "Student", groupname_col = "black_line") %>% 
   cols_label(
-    black_line_why = md("")) 
-
-#Student is repeated twice in this chart. 
+    black_line_why = md("")) %>% 
+  tab_options(
+    data_row.padding = gt::px(3),
+    heading.title.font.size = "small",
+    table.font.size = "12px"
+  )
 
 ```
 
-> #### Intervention Analysis
->
-> Teachers across the board agreed that the intervention is working for student D based on the data displayed. Teachers believed that the intervention was either not working or they were unable to interpret the data for student A. Students B and C were also difficult for teachers to interpret, but overall they displayed an understanding that the intervention was working. If teachers were unable to tell whether the intervention was working or not, they stated the need to listen to the student in order to diagnose their progress. 
-
+<br>
+<br>
+<p style="color:#009E73; font-size:20px">
+<b>Results:</b> Teachers across the board agreed that the intervention is working for student D based on the data displayed. Teachers believed that the intervention was either not working or they were unable to interpret the data for student A. Students B and C were also difficult for teachers to interpret, but overall they displayed an understanding that the intervention was working. If teachers were unable to tell whether the intervention was working or not, they stated the need to listen to the student in order to diagnose their progress. 
+</p>
+<br>
+<br>
 
 #### **State Reading Test Score**
+<br>
 
-#### **Which line might better correspond with the SBAC performance level?**
+##### **Which line might better correspond with the SBAC performance level?**
 
 ```{r}
 long %>%
@@ -488,7 +536,9 @@ long %>%
 
 ```
 
-#### **Based on the last data point from *May or June* ONLY, which point might better match what you expect from a student at this SBAC performance level?**
+<br>
+
+##### **Based on the last data point from *May or June* ONLY, which point might better match what you expect from a student at this SBAC performance level?**
 
 ```{r lastpoint}
 
@@ -516,7 +566,9 @@ long %>%
 
 ```
 
-#### **Based on the first data point from *October or November* ONLY, which point might better match what you expect from a student at this SBAC performance level?**
+<br>
+
+##### **Based on the first data point from *October or November* ONLY, which point might better match what you expect from a student at this SBAC performance level?**
 
 ```{r firstpoint}
 
@@ -544,11 +596,14 @@ long %>%
 
 ```
 
-> #### SBAC Correspondance Analysis
-> 
-> The following trends were observed across teacher responses:
-> - Neither line corresponded better with the SBAC performance level
-> - For both the first and last data points, many teachers noted the lack of difference between lines displayed. Those that did observe a difference found the ORF (yellow) line to correspond more effectively in both circumstances.
+<br>
+<br>
+<p style="color:#009E73; font-size:20px">
+<b>Results:</b> Neither line corresponded better with the SBAC performance level. For both the first and last data points, many teachers noted the lack of difference between lines displayed. Those that did observe a difference found the ORF (Yellow) line to correspond more effectively in both circumstances.
+</p>
+<br>
+<br>
+<br>
 
 ### **Student Figures with Measurement Error**
 
@@ -580,10 +635,13 @@ figs2$plot[[3]] + figs2$plot[[4]]
 #   plot_layout(nrow = 2)
 ```
 
+<br>
+<br>
 
 #### **Progress Monitoring and Data-Based Decisions**
+<br>
 
-#### **Which line might be better for progress monitoring and data-based decisions?**
+##### **Which line might be better for progress monitoring and data-based decisions?**
 
 ```{r f1betterline}
 
@@ -600,19 +658,28 @@ long %>%
   gt::gt(rowname_col = "Student", groupname_col = "better_line") %>% 
   cols_label(
     better_line_why = md(""),
-    Teacher = (""))
+    Teacher = ("")) %>% 
+  tab_options(
+    data_row.padding = gt::px(3),
+    heading.title.font.size = "small",
+    table.font.size = "12px"
+  )
 
 
 ```
 
-> #### Decision Making Analysis
->
-> A majority of teachers noted the lack of difference between lines and the same trend observed in both data sets. 
-
+<br>
+<br>
+<p style="color:#009E73; font-size:20px">
+<b>Results:</b> A majority of teachers noted the lack of difference between lines and the same trend observed in both data sets.
+</p>
+<br>
+<br>
 
 #### **Measurement Error Useful?**
+<br>
 
-#### **Does the shaded area in the graphs give you useful information if you were using the graphs to make data-based decisions?**
+##### **Does the shaded area in the graphs give you useful information if you were using the graphs to make data-based decisions?**
 
 ```{r}
 
@@ -639,6 +706,8 @@ long %>%
 
 ```
 
+<br>
+
 #### **How might you use this figure to make a data-based decision?**
 
 ```{r}
@@ -649,10 +718,21 @@ long %>%
   gt::gt(rowname_col = "", groupname_col = "Student") %>% 
   cols_label(
     response = md("Response"),
-    Teacher = (""))
+    Teacher = ("")) %>% 
+  tab_options(
+    data_row.padding = gt::px(3),
+    heading.title.font.size = "small",
+    table.font.size = "12px"
+  )
 ```
 
-> #### Shaded Area Analysis
->
-> A majority of teachers stated that the shaded area was helpful when observing the data. Common applications of the measurement error included early identification, understanding the range a student falls within, and as a guide for implementing assistance in the future. 
+<br>
+<br>
+<p style="color:#009E73; font-size:20px">
+<b>Results:</b> A majority of teachers stated that the shaded area was helpful when observing the data. Common applications of the measurement error included early identification, understanding the range a student falls within, and as a guide for implementing assistance in the future. 
+</p>
+<br>
+<br>
+
+
 
