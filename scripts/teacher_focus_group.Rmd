@@ -100,7 +100,7 @@ long_g2 <- final_g2_data %>%
 
 ### **Student Figures**
 
-**The below figures are representative of 3rd grade student scores. Please refer back to these figures when observing the data collected from teacher surveys.**
+**The below figures are representative of 2nd grade student scores. Please refer back to these figures when observing the data collected from teacher surveys.**
 
 ```{r}
 
@@ -189,7 +189,7 @@ long_g2 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> Based on all of the second grade ORF scores, all three teachers unanimously agreed that these students fell below the 2nd grade reading level and would be considered at risk.
 
 </p>
 <br>
@@ -241,7 +241,7 @@ long_g2 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> Many teachers believe these students are at risk of poor reading outcomes. When asked to further explain, many teachers felt they didn't have enough information. To make a conclusive decision about the student, teachers asked to see an oral sample and data on reading fluency.
 
 </p>
 <br>
@@ -334,7 +334,7 @@ pm_g2$tbles[[1]]
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> For most of the plots, teachers agreed that the black (CORE) line was better for progress monitoring. Common aspects pointed out included steady and realistic inclines displayed as well as the data being indicative of progress. 
 
 </p>
 <br>
@@ -370,7 +370,7 @@ long_g2 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> Many teachers agreed that the black (CORE) line is more trustworthy based on its trajectory. Some noted the steady growth that the line follows which is indicative of progress. 
 
 </p>
 <br>
@@ -462,7 +462,7 @@ long_g2 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> Most teachers noted that is was easier to differentiate that the intervention was working based on the black (CORE) line. It was commonly difficult to determine if the intervention was working when only observing the yellow line. 
 
 </p>
 <br>
@@ -528,7 +528,7 @@ long_g2 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> Teachers unanimously agreed that the black (CORE) line was better for progress-monitoring and data-based decisions. Many pointed out that the margin of error was small to none compared to the yellow line. 
 
 </p>
 <br>
@@ -590,7 +590,7 @@ long_g2 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> Teachers unanimously agreed that the shaded area present on the graphs was helpful when making data-based decisions. Teachers noted increased usability as the black (CORE) line gives them more reliable and accurate data. 
 
 </p>
 <br>
@@ -1306,7 +1306,7 @@ long_g4 <- final_g4_data %>%
 
 ### **Student Figures**
 
-**The below figures are representative of 3rd grade student scores. Please refer back to these figures when observing the data collected from teacher surveys.**
+**The below figures are representative of 4th grade student scores. Please refer back to these figures when observing the data collected from teacher surveys.**
 
 ```{r}
 
@@ -1394,7 +1394,7 @@ long_g4 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> Based on these ORF scores, many teachers believe that this student is reading significantly below the 4th grade reading level. On a few occasions, one teacher argued that this may just be a slower reader, not a student reading below grade level; comprehension data and fluency scores would help to assist the teacher in determining if the student is below grade level.  
 
 </p>
 <br>
@@ -1446,7 +1446,7 @@ long_g4 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> Many teachers agreed that this student is at risk of poor reading outcomes; however, the majority needed more information to make this conclusion. Many asked for more formative assessment, comprehension scores, attendance records, and an IEP if the student has one. 
 
 </p>
 <br>
@@ -1541,7 +1541,7 @@ pm_g4$tbles[[4]]
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> Most teachers agreed that the black (CORE) line was better for progress monitoring as it displayed steady growth. A few noted that both lines showed consistent trends and that some data points could be considered outliers overall. 
 
 </p>
 <br>
@@ -1577,7 +1577,7 @@ long_g4 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> A majority of teachers agreed that the black (CORE) line was more trustworthy. One teacher noted that even though the yellow line technically shows more growth, the black line is much more consistent with its data making it more reliable. 
 
 </p>
 <br>
@@ -1768,7 +1768,7 @@ long_g4 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> Although it was close, more teachers agreed that the black (CORE) line corresponds better with the SBAC performance level. Based on the first data point from October or November only, most teachers agreed that the black (CORE) line is a better match for the student's expected SBAC performance level. However, when looking only at the last data point from May or June only, more teachers agreed that the yellow line was a better comparison.  
 
 </p>
 <br>
@@ -1834,7 +1834,7 @@ long_g4 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> Teachers almost unanimously agreed that the black (CORE) line was better for progress monitoring and data-based decisions. Many noted that it appeared to have a smaller measurement error and more consistent trend. 
 
 </p>
 <br>
@@ -1896,7 +1896,7 @@ long_g4 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
+<b>Results:</b> Teachers unanimously agreed that the shaded area was helpful to consider when making data-based decisions. Many noted that it increased the reliability of the data overall and allowed them to evaluate whether their interventions were effective or not. 
 
 </p>
 <br>
