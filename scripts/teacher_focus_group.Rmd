@@ -3,9 +3,9 @@ title: "CORE: Teacher Focus Group Survey"
 author: "Makayla Whitney, Joe Nese"
 output:
   html_document:
-    toc: true
-    toc_depth: 4
-    toc_float: true
+#    toc: true
+#    toc_depth: 4
+#    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -26,7 +26,65 @@ library(fs)
 theme_set(theme_minimal())
 ```
 
+# Introduction
 
+The purpose of this survey was to solicit teacher feedback about the utility and interpretability of the CORE data compared to Traditional ORF scores to help collect consequential evidence of validity for CORE. 
+We conducted an online survey in summer of 2020 with institutional IRB approval with nine teachers, three in each of Grades 2 to 4, who participated in our [2018-19 study](https://jnese.github.io/core-blog/posts/2019-04-12-consequential-validity-study-procedures/). 
+
+We provided participating teachers with reports and graphs for individual students using de-identified, longitudinal student results from the 2018-19 study to compare the differentiation of teachers’ decisions about instruction between Traditional ORF (easyCBM) results and CORE results. 
+
+# Summary
+
+# Sample
+
+All teachers who participate in the [2018-19 study](https://jnese.github.io/core-blog/posts/2019-04-12-consequential-validity-study-procedures/) were invited to participate in the study. The first three teachers per grade that responded to the invitation to participate were selected to participate. 
+
+Of the 1,008 student from the 2018-19 study, only 430 students had complete ORF data across the four measurement occasions for both measures, CORE and Traditional ORF. For each grade, we randomly sampled four students that scored at or above the 10th percentile and at or below the 25th percentile.
+
+# Procedures
+
+For each student, we created two figures. The first figure showed the CORE and Traditional ORF scores across the four measurement occasions. The second figure showed the same data but included a shaded region representing the standard error of measurement (*SEM*) at each measurement occasion. The Traditional ORF *SEM* was a classical *SEM* taken from the easyCBM technical documentation, and the CORE *SEM* was a conditional *SEM*. A more thorough description can be found [here](https://journals.sagepub.com/doi/abs/10.1177/1534508420937801).
+
+
+For each student, teachers responded to the following items.
+
+* Teachers were provided with the student’s fall easyCBM oral reading fluency score in words correct per minute (WCPM) and were asked to:
+  + describe the student’s reading level based on this score alone.
+  + if the student was above, at, or below grade level.
+  + if the student was at risk of poor reading outcomes.
+
+The teacher then needed to refer to the figure without the *SEM* to answer the following questions.
+
+* Which line might be better for progress monitoring?
+
+* Based on the trajectory of the lines - that is, the shape of the lines - which line might be more trustworthy?
+
+* Let’s say the figure shows data of a student receiving a reading intervention.
+
+  + For both the the YELLOW and BLACK lines separately: Look at the first three data points only (ignore the last data point from May or June). What might you say about the intervention? Why?
+
+Teachers were told:
+
+> The figure below shows the same data you have just seen, but in a different way. Now, the lines are in separate graphs, and each is surrounded by gray shading. The shaded area represents the area that we think contains the students true score. This is sometimes called the measurement error. 
+
+* The less measurement error, the better, because that means the score is more accurate. That is, the score better reflects the students “true ORF ability.” So the smaller the gray shaded area, the better. How familiar are you with this concept?
+
+* When you and your peers discuss student data (for example, in school teams), do you discuss measurement error, or whether the data is accurate, or whether the data reflects what the student can do?
+
+* Which line might be better for progress monitoring and data-based decisions? Why?
+
+* Does the shaded area in the graphs give you useful information if you were using the graphs to make data-based decisions?
+
+* How might you use this figure to make a data-based decision? 
+
+Teachers in Grades 3 and 4 were also
+given the students' year-end Smarter Balanced ELA (reading) performance level and were asked the following questions.
+
+* Which line might better correspond with the SBAC performance level?
+
+* Based on the last data point from May or June ONLY, which point might better match what you expect from a student at this performance level?
+
+* Based on the first data point from Oct or Nov ONLY, which point might better match what you expect from a student at this performance level?
 
 ```{r}
 qual_raw_g2 <- read_csv(here("data", "qual_raw_g2.csv"))
@@ -123,7 +181,7 @@ figs2 <- figs2 %>%
 
 figs2$plot[[1]] + figs2$plot[[2]]
 
-figs2$plot[[1]] + figs2$plot[[2]]
+figs2$plot[[3]] + figs2$plot[[4]]
 
 
 ```
@@ -190,7 +248,6 @@ long_g2 %>%
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> Based on all of the second grade ORF scores, all three teachers unanimously agreed that these students fell below the 2nd grade reading level and would be considered at risk.
-
 </p>
 <br>
 <br>
@@ -242,7 +299,6 @@ long_g2 %>%
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> Many teachers believe these students are at risk of poor reading outcomes. When asked to further explain, many teachers felt they didn't have enough information. To make a conclusive decision about the student, teachers asked to see an oral sample and data on reading fluency.
-
 </p>
 <br>
 <br>
@@ -335,7 +391,6 @@ pm_g2$tbles[[1]]
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> For most of the plots, teachers agreed that the black (CORE) line was better for progress monitoring. Common aspects pointed out included steady and realistic inclines displayed as well as the data being indicative of progress. 
-
 </p>
 <br>
 <br>
@@ -395,7 +450,6 @@ long_g2 %>%
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> Many teachers agreed that the black (CORE) line is more trustworthy based on its trajectory. Some noted the steady growth that the line follows which is indicative of progress. 
-
 </p>
 <br>
 <br>
@@ -484,7 +538,6 @@ long_g2 %>%
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> Most teachers noted that is was easier to differentiate that the intervention was working based on the black (CORE) line. It was commonly difficult to determine if the intervention was working when only observing the yellow line. 
-
 </p>
 <br>
 <br>
@@ -549,7 +602,6 @@ long_g2 %>%
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> Teachers unanimously agreed that the black (CORE) line was better for progress-monitoring and data-based decisions. Many pointed out that the margin of error was small to none compared to the yellow line. 
-
 </p>
 <br>
 <br>
@@ -611,7 +663,6 @@ long_g2 %>%
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> Teachers unanimously agreed that the shaded area present on the graphs was helpful when making data-based decisions. Teachers noted increased usability as the black (CORE) line gives them more reliable and accurate data. 
-
 </p>
 <br>
 <br>
@@ -706,7 +757,7 @@ figs <- figs %>%
 
 figs$plot[[1]] + figs$plot[[2]]
 
-figs$plot[[1]] + figs$plot[[2]]
+figs$plot[[3]] + figs$plot[[4]]
 
 # wrap_plots(figs$plot) + 
 #   plot_layout(nrow = 2)
@@ -1369,7 +1420,7 @@ figs4 <- figs4 %>%
 
 figs4$plot[[1]] + figs4$plot[[2]]
 
-figs4$plot[[1]] + figs4$plot[[2]]
+figs4$plot[[3]] + figs4$plot[[4]]
 
 
 ```
@@ -1436,7 +1487,6 @@ long_g4 %>%
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> Based on these ORF scores, many teachers believe that this student is reading significantly below the 4th grade reading level. On a few occasions, one teacher argued that this may just be a slower reader, not a student reading below grade level; comprehension data and fluency scores would help to assist the teacher in determining if the student is below grade level.  
-
 </p>
 <br>
 <br>
@@ -1488,7 +1538,6 @@ long_g4 %>%
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> Many teachers agreed that this student is at risk of poor reading outcomes; however, the majority needed more information to make this conclusion. Many asked for more formative assessment, comprehension scores, attendance records, and an IEP if the student has one. 
-
 </p>
 <br>
 <br>
@@ -1583,7 +1632,6 @@ pm_g4$tbles[[4]]
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> Most teachers agreed that the black (CORE) line was better for progress monitoring as it displayed steady growth. A few noted that both lines showed consistent trends and that some data points could be considered outliers overall. 
-
 </p>
 <br>
 <br>
@@ -1643,7 +1691,6 @@ long_g4 %>%
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> A majority of teachers agreed that the black (CORE) line was more trustworthy. One teacher noted that even though the yellow line technically shows more growth, the black line is much more consistent with its data making it more reliable. 
-
 </p>
 <br>
 <br>
@@ -1732,8 +1779,7 @@ long_g4 %>%
 <br>
 <br>
 <p style="color:#009E73; font-size:20px">
-<b>Results:</b> 
-
+<b>Results:</b> The results are largely similar across the two measures, with the exception that for the CORE data, 5 teachers reported that the intervention was NOT working, but 0 teachers reported the same for the Traditional data. According to the teacher feedback, it may be that the CORE data better displays student progress, or growth.
 </p>
 <br>
 <br>
@@ -1832,7 +1878,6 @@ long_g4 %>%
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> Although it was close, more teachers agreed that the black (CORE) line corresponds better with the SBAC performance level. Based on the first data point from October or November only, most teachers agreed that the black (CORE) line is a better match for the student's expected SBAC performance level. However, when looking only at the last data point from May or June only, more teachers agreed that the yellow line was a better comparison.  
-
 </p>
 <br>
 <br>
@@ -1897,7 +1942,6 @@ long_g4 %>%
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> Teachers almost unanimously agreed that the black (CORE) line was better for progress monitoring and data-based decisions. Many noted that it appeared to have a smaller measurement error and more consistent trend. 
-
 </p>
 <br>
 <br>
@@ -1959,7 +2003,6 @@ long_g4 %>%
 <br>
 <p style="color:#009E73; font-size:20px">
 <b>Results:</b> Teachers unanimously agreed that the shaded area was helpful to consider when making data-based decisions. Many noted that it increased the reliability of the data overall and allowed them to evaluate whether their interventions were effective or not. 
-
 </p>
 <br>
 <br>
